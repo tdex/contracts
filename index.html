@@ -9,19 +9,64 @@
 
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <md-content>
-    <md-toolbar md-scroll-shrink >
+    <!--<md-toolbar md-scroll-shrink>
       <div class="md-toolbar-tools">
-        <h3>
-          <span>{{title}}</span>
-        </h3>
+        <h1 ng-bind="title"></h1>
       </div>
-    </md-toolbar>
+    </md-toolbar>-->
 
-    <main ng-view='' class="md-padding"></main>
+    <div layout="column" class="relative" layout-fill role="main">
+      <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
+      </md-button>
+      <md-toolbar ng-show="!showSearch">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+            Menu
+          </md-button>
+          <h3>
+            Lista de contratos
+          </h3>
+          <span flex></span>
+          <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+            Buscar
+          </md-button>
+          <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+            Mais+
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-toolbar class="md-hue-1" ng-show="showSearch">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+            <ng-md-icon icon="arrow_back"></ng-md-icon>
+          </md-button>
+          <h3 flex="10">
+            Voltar
+          </h3>
+          <md-input-container md-theme="input" flex>
+            <label>&nbsp;</label>
+            <input ng-model="search.who" placeholder="Pesquisar">
+          </md-input-container>
+          <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+            <ng-md-icon icon="search"></ng-md-icon>
+          </md-button>
+          <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+            <ng-md-icon icon="more_vert"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <main ng-view='' class="md-padding"></main>
   </md-content>
 
   <!-- AngularJS Dependencies -->
@@ -36,7 +81,7 @@
   <script src="resources/modulos/main/main.controller.js"></script>
   <script src="resources/modulos/lista/lista.controller.js"></script>
   <script src="resources/modulos/lista/lista.factory.js"></script>
-  
+
 
 </body>
 
