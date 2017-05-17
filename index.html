@@ -8,15 +8,21 @@
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-  <h1 ng-bind="tittle"></h1>
+  <md-content>
+    <md-toolbar md-scroll-shrink >
+      <div class="md-toolbar-tools">
+        <h3>
+          <span>{{title}}</span>
+        </h3>
+      </div>
+    </md-toolbar>
 
-  <main>
-    <div ng-view=''></div>
-  </main>
+    <main ng-view='' class="md-padding"></main>
+  </md-content>
 
   <!-- AngularJS Dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -29,6 +35,8 @@
   <script src="app.js"></script>
   <script src="resources/modulos/main/main.controller.js"></script>
   <script src="resources/modulos/lista/lista.controller.js"></script>
+  <script src="resources/modulos/lista/lista.factory.js"></script>
+  
 
 </body>
 

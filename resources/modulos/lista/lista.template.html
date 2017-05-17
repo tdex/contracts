@@ -1,3 +1,44 @@
-<h2>Aluno: <span ng-bind="nome"></span></h2>
+<md-button class="md-raised">Adicionar</md-button>
+<h1>{{nome}}</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Data acordo comercial</th>
+      <th>Natureza</th>
+      <th>Comprador</th>
+      <th>Vendedor</th>
+      <th>Energia referência</th>
+      <th>Energia entregue</th>
+      <th>Status aprovação</th>
+      <th>Modelo</th>
+      <th>Preço base contratado</th>
+      <th>Submercado</th>
+      <th>Início fornecimento</th>
+      <th>Fim fornecimento</th>
+      <th>Início vigência</th>
+      <th>Fim vigência</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="ct in lista | orderBy: 'codigo'">
+      <td ng-bind='ct.codigo'></td>
+      <td ng-bind='ct.dataAcordo'></td>
+      <td ng-bind='ct.natureza'></td>
+      <td ng-bind='ct.comprador'></td>
+      <td ng-bind='ct.vendedor'></td>
+      <td ng-bind='ct.energiaRegerencia'></td>
+      <td ng-bind='ct.energiaEntregue'></td>
+      <td ng-bind='ct.status'></td>
+      <td ng-bind='ct.modelo'></td>
+      <td ng-bind='ct.preco'></td>
+      <td ng-bind='ct.submercado'></td>
+      <td ng-bind='ct.inicioFornecimento'></td>
+      <td ng-bind='ct.fimFornecimento'></td>
+      <td ng-bind='ct.inicioVigencia'></td>
+      <td ng-bind='ct.fimVigencia'></td>
+    </tr>
+  </tbody>
+</table>
 
-<div>{{lista}}--</div>
+<!--<div>{{lista}}--</div>-->

@@ -1,5 +1,5 @@
 app.controller('MainController', function ($scope) {
   var vm = $scope;
 
-  vm.tittle = 'Lista de contratos';
+  vm.title = 'Lista de contratos';
 });

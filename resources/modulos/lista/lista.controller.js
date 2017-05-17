@@ -1,4 +1,4 @@
-app.controller('ListaController', function ($scope, $http) {
+app.controller('ListaController', function ($scope, $http, ListaFactory) {
   var vm = $scope;
 
   vm.nome = 'tarcisio.d.silva';
@@ -6,7 +6,7 @@ app.controller('ListaController', function ($scope, $http) {
 
   vm.getListaContratos = function () {
     $http.get('resources/data_files/JSON.json').then(function (res) {
-      vm.lista = res.data;
+      vm.lista = ListaFactory.convertList(res.data);
     }); 
   }
 
