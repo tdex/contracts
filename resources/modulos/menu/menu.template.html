@@ -3,7 +3,7 @@
 </md-button>
 <md-toolbar ng-show="!showSearch">
   <div class="md-toolbar-tools">
-    <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu" class="md-fab md-mini material-icons">
+    <md-button ng-click="toggleLeft()" hide-gt-md aria-label="Menu" class="md-fab md-mini material-icons">
       apps
     </md-button>
     <h3>
@@ -13,6 +13,19 @@
     <md-button aria-label="Search" ng-click="showSearch = !showSearch" class="md-fab md-mini material-icons">
       search
     </md-button>
+
+    <md-menu>
+      <md-button aria-label="Open Settings" ng-click="openMenu($mdMenu, $event)" class="md-fab md-mini material-icons">
+        <span md-menu-origin>filter_listz</span>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item> teste </md-menu-item>
+        <md-menu-item> codigo </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item> fim </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
     <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)" class="md-fab md-mini material-icons">
       add
     </md-button>
@@ -29,3 +42,18 @@
     </md-input-container>
   </div>
 </md-toolbar>
+
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+
+  <md-toolbar class="md-theme-indigo">
+    <h1 class="md-toolbar-tools">Menu</h1>
+  </md-toolbar>
+
+  <md-content layout-margin>
+    <p>This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.</p>
+    <md-button ng-click="toggleLeft()" class="md-accent">
+      Close this Sidenav
+    </md-button>
+  </md-content>
+
+</md-sidenav>
