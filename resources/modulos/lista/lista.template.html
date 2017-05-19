@@ -1,52 +1,94 @@
-<!--<table>
-  <thead>
-    <tr>
-      <th>Código</th>
-      <th>Data acordo comercial</th>
-      <th>Natureza</th>
-      <th>Comprador</th>
-      <th>Vendedor</th>
-      <th>Energia referência</th>
-      <th>Energia entregue</th>
-      <th>Status aprovação</th>
-      <th>Modelo</th>
-      <th>Preço base contratado</th>
-      <th>Submercado</th>
-      <th>Início fornecimento</th>
-      <th>Fim fornecimento</th>
-      <th>Início vigência</th>
-      <th>Fim vigência</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="ct in lista">
-      <td ng-bind='ct.codigo'></td>
-      <td ng-bind='ct.dataAcordo'></td>
-      <td ng-bind='ct.natureza'></td>
-      <td ng-bind='ct.comprador'></td>
-      <td ng-bind='ct.vendedor'></td>
-      <td ng-bind='ct.energiaRegerencia'></td>
-      <td ng-bind='ct.energiaEntregue'></td>
-      <td ng-bind='ct.status'></td>
-      <td ng-bind='ct.modelo'></td>
-      <td ng-bind='ct.preco'></td>
-      <td ng-bind='ct.submercado'></td>
-      <td ng-bind='ct.inicioFornecimento'></td>
-      <td ng-bind='ct.fimFornecimento'></td>
-      <td ng-bind='ct.inicioVigencia'></td>
-      <td ng-bind='ct.fimVigencia'></td>
-    </tr>
-  </tbody>
-</table>-->
+<md-toolbar ng-show="!showSearch">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="toggleLeft()" hide-gt-sm aria-label="Menu" class="md-icon-button material-icons">
+      menu
+    </md-button>
+    <h3>
+      Lista de contratos
+    </h3>
+    <span flex></span>
 
+    <md-button hide show-gt-sm aria-label="Pesquisar" ng-click="showSearch = !showSearch" class="md-icon-button material-icons">
+      search
+      <md-tooltip> Pesquisar </md-tooltip>
+    </md-button>
 
-<md-list flex>
-  <md-subheader layout-fill ng-click="selecionaTodos();">
-    <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> Selecionar todos {{filtroPesquisa}}
+    <md-menu ng-hide="excluir">
+      <md-button hide show-gt-sm aria-label="Reordenar lista" ng-click="openMenuReordenacao($mdOpenMenu, $event)" class="md-icon-button  material-icons">
+        <span style="padding-left: 12px;">filter_listz</span>
+        <md-tooltip> Reordenar lista </md-tooltip>
+      </md-button>
+      <md-menu-content ng-mouseleave="$mdMenu.close()">
+        <label class="md-padding"><strong>Ordenar por:</strong></label>
+        <md-menu-item ng-repeat="opcao in opcoesMenu | orderBy: 'nome'">
+          <md-button ng-bind="opcao.nome" aria-label="opcao.nome" ng-click="ordenarListaPor(opcao.order)"></md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+    <md-button hide show-gt-sm aria-label="Adicionar contrato" ng-hide="excluir" ng-click="showListBottomSheet($event)" class="md-icon-button material-icons">
+      add
+      <md-tooltip> Adicionar </md-tooltip>
+    </md-button>
+    <md-button hide show-gt-sm aria-label="Excluir contrato" ng-click="excluir = true" ng-hide="excluir" class="md-icon-button material-icons">
+      delete
+      <md-tooltip> Excluir </md-tooltip>
+    </md-button>
+    <md-button hide show-gt-sm aria-label="Excluir contrato" ng-click="excluir = false; excluirContratosSelecionados();" ng-show="excluir"
+      class="md-icon-button material-icons">
+      delete_forever
+      <md-tooltip> Deletar </md-tooltip>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-hue-3" ng-show="showSearch">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="showSearch = !showSearch" aria-label="Back" class="md-icon-button  material-icons">
+      arrow_back
+    </md-button>
+    <md-input-container md-theme="input" flex class="navbar-search">
+      <label>&nbsp;</label>
+      <input ng-model="filtroPesquisa" placeholder="Pesquisar" autofocus autocomplete="false">
+    </md-input-container>
+  </div>
+</md-toolbar>
+
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+
+  <md-toolbar class="md-theme-indigo">
+    <h1 class="md-toolbar-tools">
+      <md-button ng-click="toggleLeft()" aria-label="Back" class="md-icon-button material-icons">
+        arrow_back
+      </md-button>
+      <span>  Menu</span>
+    </h1>
+  </md-toolbar>
+
+  <md-content layout-margin>
+    <p>This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.</p>
+    <md-button class="md-accent">
+      Close this Sidenav
+    </md-button>
+  </md-content>
+</md-sidenav>
+
+<md-list flex class="no-padding">
+  <md-subheader layout-fill ng-click="selecionaTodos();" class="no-outline pointer" ng-show="excluir">
+    <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong> {{todosSelecionados}}
   </md-subheader>
-  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event)">
+  <md-divider></md-divider>
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event)" ng-hide="excluir">
+    <div class="md-list-item-text no-outline" layout="row" >
+      <h3>Código: <span ng-bind="ct.codigo"></span></h3>
+      <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date"></span></h4>
+      <p>Status da aprovação: <span ng-bind="ct.status"></span></p>
+    </div>
+    <md-divider></md-divider>
+  </md-list-item>
+
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-show="excluir" ng-click="null" class="no-outline pointer">
     <md-checkbox ng-model="ct.selecionado"></md-checkbox>
-    <div class="md-list-item-text" layout="row">
+    <div class="md-list-item-text no-outline" layout="row" ng-click="ct.selecionado = !ct.selecionado">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
       <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date"></span></h4>
       <p>Status da aprovação: <span ng-bind="ct.status"></span></p>

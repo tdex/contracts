@@ -42,3 +42,15 @@ md-tooltip .md-content {
     opacity: 1;
     background: #564f52;
 }
+
+.no-outline {
+  outline: 0;
+} 
+
+.no-padding{
+  padding: 0;
+}
+
+.pointer {
+  cursor: pointer;
+}
