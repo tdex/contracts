@@ -1,4 +1,4 @@
-app.controller('ListaController', function ($scope, $http, ListaFactory) {
+app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDialog) {
   var vm = $scope;
 
   vm.nome = 'tarcisio.d.silva';
@@ -10,7 +10,7 @@ app.controller('ListaController', function ($scope, $http, ListaFactory) {
     $http.get('resources/data_files/JSON.json').then(function (res) {
       vm.lista = ListaFactory.convertList(res.data);
     });
-  }
+  };
 
   vm.selecionaTodos = function () {
     if (vm.lista) {
@@ -20,10 +20,40 @@ app.controller('ListaController', function ($scope, $http, ListaFactory) {
         vm.todosSelecionados = !vm.todosSelecionados;
       });
     }
-  }
+  };
 
   vm.ordenarListaPor = function (campo) {
     alert(campo);
+  };
+
+  vm.selecionaContrato = function (ev) {
+    $mdDialog.show({
+      controller: contratoModalController,
+      templateUrl: 'resources/modulos/contrato/contrato.modal.template.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
+    })
+      .then(function (answer) {
+        vm.status = 'You said the information was "' + answer + '".';
+      }, function () {
+        vm.status = 'You cancelled the dialog.';
+      });
+  };
+
+  function contratoModalController($scope, $mdDialog) {
+    $scope.hide = function () {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
   }
 
   function activate() {
