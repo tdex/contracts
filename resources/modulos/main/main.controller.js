@@ -1,8 +1,7 @@
-app.controller('MainController', function ($scope, $mdSidenav) {
+app.controller('MainController', function ($scope, $mdSidenav, $mdDialog) {
   var vm = $scope;
-
-  vm.title = 'Lista de contratos';
   var originatorEv;
+  vm.title = 'Lista de contratos';
 
   vm.toggleLeft = buildToggler('left');
   vm.toggleRight = buildToggler('right');
@@ -13,8 +12,26 @@ app.controller('MainController', function ($scope, $mdSidenav) {
     };
   }
 
-  vm.openMenu = function ($mdMenu, ev) {
+  vm.openMenuReordenacao = function ($mdOpenMenu, ev) {
     originatorEv = ev;
-    $mdMenu.open(ev);
+    $mdOpenMenu(ev);
   };
+
+  vm.opcoesMenu = [
+    {order: 'codigo', nome: 'Código'},
+    {order: 'dataAcordo', nome: 'Data acordo comercial'},
+    {order: 'natureza', nome: 'Natureza'},
+    {order: 'comprador', nome: 'Comprador'},
+    {order: 'vendedor', nome: 'Vendedor'},
+    {order: 'energiaReferencia', nome: 'Energia referência'},
+    {order: 'energiaEntregue', nome: 'Energia entregue'},
+    {order: 'status', nome: 'Status aprovação'},
+    {order: 'modelo', nome: 'Modelo'},
+    {order: 'preco', nome: 'Preço base contratado'},
+    {order: 'submercado', nome: 'Submercado'},
+    {order: 'inicioFornecimento', nome: 'Início fornecimento'},
+    {order: 'fimFornecimento', nome: 'Fim fornecimento'},
+    {order: 'inicioVigencia', nome: 'Início vigência'},
+    {order: 'fimVigencia', nome: 'Fim vigência'}
+  ]
 });

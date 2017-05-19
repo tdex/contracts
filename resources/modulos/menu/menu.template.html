@@ -1,44 +1,45 @@
-<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
-  <ng-md-icon icon="add"></ng-md-icon>
-</md-button>
 <md-toolbar ng-show="!showSearch">
   <div class="md-toolbar-tools">
-    <md-button ng-click="toggleLeft()" hide-gt-md aria-label="Menu" class="md-fab md-mini material-icons">
+    <md-button ng-click="toggleLeft()" hide-gt-sm aria-label="Menu" class="md-fab md-mini material-icons">
       apps
     </md-button>
     <h3>
       Lista de contratos
     </h3>
     <span flex></span>
-    <md-button aria-label="Search" ng-click="showSearch = !showSearch" class="md-fab md-mini material-icons">
+
+    <md-button hide show-gt-sm aria-label="Pesquisar" ng-click="showSearch = !showSearch" class="md-fab md-mini material-icons">
       search
+      <md-tooltip> Pesquisar </md-tooltip>
     </md-button>
 
     <md-menu>
-      <md-button aria-label="Open Settings" ng-click="openMenu($mdMenu, $event)" class="md-fab md-mini material-icons">
-        <span md-menu-origin>filter_listz</span>
+      <md-button hide show-gt-sm aria-label="Reordenar lista" ng-click="openMenuReordenacao($mdOpenMenu, $event)" class="md-fab md-mini material-icons">
+        filter_listz
+        <md-tooltip> Reordenar lista </md-tooltip>
       </md-button>
-      <md-menu-content width="4">
-        <md-menu-item> teste </md-menu-item>
-        <md-menu-item> codigo </md-menu-item>
-        <md-menu-divider></md-menu-divider>
-        <md-menu-item> fim </md-menu-item>
+      <md-menu-content ng-mouseleave="$mdMenu.close()" ng-controller="ListaController">
+        <label class="md-padding"><strong>Ordenar por:</strong></label>
+        <md-menu-item ng-repeat="opcao in opcoesMenu | orderBy: 'nome'">
+          <md-button ng-bind="opcao.nome" aria-label="opcao.nome" ng-click="ordenarListaPor(opcao.order)"></md-button>
+        </md-menu-item>
       </md-menu-content>
     </md-menu>
-
-    <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)" class="md-fab md-mini material-icons">
+    <md-button hide show-gt-sm aria-label="Adicionar contrato" ng-click="showListBottomSheet($event)" class="md-fab md-mini material-icons">
       add
+      <md-tooltip> Adicionar </md-tooltip>
     </md-button>
   </div>
 </md-toolbar>
-<md-toolbar class="md-hue-1" ng-show="showSearch">
+
+<md-toolbar class="md-hue-3" ng-show="showSearch">
   <div class="md-toolbar-tools">
     <md-button ng-click="showSearch = !showSearch" aria-label="Back" class="md-fab md-mini material-icons">
       arrow_back
     </md-button>
-    <md-input-container md-theme="input" flex>
+    <md-input-container md-theme="input" flex ng-controller="ListaController">
       <label>&nbsp;</label>
-      <input ng-model="search.who" placeholder="Pesquisar">
+      <input ng-model="filtroPesquisa" placeholder="Pesquisar" autofocus autocomplete="false">
     </md-input-container>
   </div>
 </md-toolbar>

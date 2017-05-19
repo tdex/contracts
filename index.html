@@ -17,14 +17,11 @@
   <link rel="stylesheet" href="resources/styles/estilo.css">
 </head>
 
-<body>
+<body layout="column">
   <md-content id="corpo-page">
-    <div layout="column" class="relative" layout-fill role="main">
-      <header menu></header>
+    <header menu layout="row" class="md-primary"></header>
 
-      <main ng-view='' class="md-padding"></main>
-    </div>
-
+    <main ng-view=''></main>
   </md-content>
 
   <!-- AngularJS Dependencies -->
