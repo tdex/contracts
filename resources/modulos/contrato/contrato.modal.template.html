@@ -2,7 +2,7 @@
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Contrato: xxxx</h2>
+        <h2>Contrato: <span ng-bind="ct.codigo"></span></h2>
         <span flex></span>
         <md-button class="md-icon-button material-icons" ng-click="cancel()">
           clear
@@ -20,32 +20,19 @@
           distributed worldwide to become one of the most cultivated fruits in the tropics.
         </p>
 
-        <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" src="img/mangues.jpg">
-
-        <p>
-          The highest concentration of Mangifera genus is in the western part of Malesia (Sumatra, Java and Borneo) and in Burma and
-          India. While other Mangifera species (e.g. horse mango, M. foetida) are also grown on a more localized basis, Mangifera
-          indica&mdash;the "common mango" or "Indian mango"&mdash;is the only mango tree commonly cultivated in many tropical
-          and subtropical regions.
-        </p>
-        <p>
-          It originated in Indian subcontinent (present day India and Pakistan) and Burma. It is the national fruit of India, Pakistan,
-          and the Philippines, and the national tree of Bangladesh. In several cultures, its fruit and leaves are ritually
-          used as floral decorations at weddings, public celebrations, and religious ceremonies.
-        </p>
       </div>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
-      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-        More on Wikipedia
+      <md-button md-autofocus ng-click="edicao = true">
+        Editar
       </md-button>
       <span flex></span>
-      <md-button ng-click="answer('not useful')">
-        Not Useful
+      <md-button ng-click="answer('not useful')" ng-show="edicao" class="md-warn">
+        Excluir
       </md-button>
-      <md-button ng-click="answer('useful')">
-        Useful
+      <md-button ng-click="answer('useful')" ng-show="edicao" class="md-raised md-primary">
+        Salvar
       </md-button>
     </md-dialog-actions>
   </form>

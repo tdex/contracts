@@ -81,7 +81,7 @@
     <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong>
   </md-subheader>
   <md-divider></md-divider>
-  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event)" ng-hide="excluir">
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event, ct)" ng-hide="excluir">
     <div class="md-list-item-text no-outline" layout="row">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
       <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date: 'dd/MM/yyyy'"></span></h4>

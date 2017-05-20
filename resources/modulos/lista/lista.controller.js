@@ -33,14 +33,17 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
     alert(campo);
   };
 
-  vm.selecionaContrato = function (ev) {
+  vm.selecionaContrato = function (ev, contrato) {
     $mdDialog.show({
       controller: contratoModalController,
       templateUrl: 'resources/modulos/contrato/contrato.modal.template.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: false,
-      fullscreen: true
+      fullscreen: true,
+      locals: {
+        contrato: contrato
+      }
     })
       .then(function (answer) {
         vm.status = 'You said the information was "' + answer + '".';
@@ -49,7 +52,11 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
       });
   };
 
-  function contratoModalController($scope, $mdDialog) {
+  function contratoModalController($scope, $mdDialog, contrato) {
+    $scope.edicao = false;
+    $scope.ct = contrato;
+
+    console.log($scope.ct);
     $scope.hide = function () {
       $mdDialog.hide();
     };
