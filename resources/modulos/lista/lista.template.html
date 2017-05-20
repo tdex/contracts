@@ -1,4 +1,4 @@
-<md-toolbar ng-show="!showSearch">
+<md-toolbar ng-show="!showSearch" class="menu">
   <div class="md-toolbar-tools">
     <md-button ng-hide="excluir" ng-click="toggleLeft()" hide-gt-sm aria-label="Menu" class="md-icon-button material-icons">
       menu
@@ -42,7 +42,7 @@
   </div>
 </md-toolbar>
 
-<md-toolbar class="md-hue-3" ng-show="showSearch">
+<md-toolbar class="md-hue-3 menu" ng-show="showSearch">
   <div class="md-toolbar-tools">
     <md-button ng-click="showSearch = !showSearch" aria-label="Back" class="md-icon-button  material-icons">
       arrow_back

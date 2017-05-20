@@ -64,9 +64,14 @@ md-toast .md-toast-content {
 #corpo-page {
   height: 100vh;
 }
+
 #corpo-page #conteudo {
   height: 100vh;
   overflow-y: scroll;
+}
+
+.menu{
+  box-shadow: rgba(140, 130, 130, 0.51) 0px 3px 8px 0px;
 }
 
 md-tooltip .md-content {
