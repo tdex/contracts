@@ -1,7 +1,7 @@
 app.controller('MainController', function ($scope, $mdSidenav, $mdDialog) {
   var vm = $scope;
   var originatorEv;
-  vm.title = 'Lista de contratos';
+  vm.title = 'Contratos';
 
   vm.toggleLeft = buildToggler('left');
   vm.toggleRight = buildToggler('right');

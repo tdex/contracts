@@ -3,8 +3,9 @@ var app = angular.module('myApp', [
   'ngMaterial'
 ]);
 
-app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
+  
   $routeProvider
     .otherwise({ redirectTo: '/' })
     .when('/', {
@@ -13,4 +14,4 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
       controller: 'ListaController',
       controllerAs: 'listCtrl'
     });
-}]);
+});

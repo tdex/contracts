@@ -17,7 +17,7 @@
 
     <md-menu ng-hide="excluir">
       <md-button hide show-gt-sm aria-label="Reordenar lista" ng-click="openMenuReordenacao($mdOpenMenu, $event)" class="md-icon-button  material-icons">
-        <span style="padding-left: 12px;">filter_listz</span>
+        sort
         <md-tooltip> Reordenar lista </md-tooltip>
       </md-button>
       <md-menu-content ng-mouseleave="$mdMenu.close()">
@@ -35,7 +35,7 @@
       delete
       <md-tooltip> Excluir </md-tooltip>
     </md-button>
-    <md-button hide show-gt-sm aria-label="Excluir contrato" ng-click="confirmaExclusao($event)" ng-show="excluir" class="md-icon-button material-icons">
+    <md-button aria-label="Excluir contrato" ng-click="confirmaExclusao($event)" ng-show="excluir" class="md-icon-button material-icons">
       delete_forever
       <md-tooltip> Deletar </md-tooltip>
     </md-button>
@@ -47,7 +47,7 @@
     <md-button ng-click="showSearch = !showSearch" aria-label="Back" class="md-icon-button  material-icons">
       arrow_back
     </md-button>
-    <md-input-container md-theme="input" flex class="navbar-search">
+    <md-input-container flex class="navbar-search">
       <label>&nbsp;</label>
       <input ng-model="filtroPesquisa" placeholder="Pesquisar" autofocus autocomplete="false">
     </md-input-container>
@@ -55,7 +55,6 @@
 </md-toolbar>
 
 <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
-
   <md-toolbar class="md-theme-indigo">
     <h1 class="md-toolbar-tools">
       <md-button ng-click="toggleLeft()" aria-label="Back" class="md-icon-button material-icons">
@@ -65,11 +64,34 @@
     </h1>
   </md-toolbar>
 
-  <md-content layout-margin>
-    <p>This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.</p>
-    <md-button class="md-accent">
-      Close this Sidenav
-    </md-button>
+  <md-content>
+    <md-list flex id="menu-movel">
+      <md-list-item ng-click="toggleLeft(); showSearch = true;">
+        <div class="md-list-item-text" layout="row" layout-align="space-around center">
+          <i class="material-icons">search </i>
+          <span> Pesquisar </span>
+        </div>
+      </md-list-item>
+      <md-list-item ng-click="toggleLeft();">
+        <div class="md-list-item-text" layout="row" layout-align="space-around center">
+          <i class="material-icons">sort </i>
+          <span> Reordenar </span>
+        </div>
+      </md-list-item>
+      <md-list-item ng-click="toggleLeft();">
+        <div class="md-list-item-text" layout="row" layout-align="space-around center">
+          <i class="material-icons">add </i>
+          <span> Adicionar </span>
+        </div>
+      </md-list-item>
+      <md-list-item ng-click="toggleLeft(); excluir = true;">
+        <div class="md-list-item-text" layout="row" layout-align="space-around center">
+          <i class="material-icons">delete </i>
+          <span> Excluir </span>
+        </div>
+      </md-list-item>
+    </md-list>
+
   </md-content>
 </md-sidenav>
 
@@ -81,7 +103,8 @@
     <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong>
   </md-subheader>
   <md-divider></md-divider>
-  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event, ct)" ng-hide="excluir">
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event, ct)"
+    ng-hide="excluir">
     <div class="md-list-item-text no-outline" layout="row">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
       <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date: 'dd/MM/yyyy'"></span></h4>

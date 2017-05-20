@@ -95,3 +95,12 @@ md-tooltip .md-content {
 .back-top {
   margin: 0px 8px 0px 0px !important;
 }
+
+#menu-movel md-list-item i {
+  top: 11px;
+  left: 20px;
+  position: absolute;
+}
+#menu-movel md-list-item span {
+  margin-left: 46px;
+}
