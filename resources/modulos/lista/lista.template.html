@@ -1,11 +1,13 @@
 <md-toolbar ng-show="!showSearch">
   <div class="md-toolbar-tools">
-    <md-button ng-click="toggleLeft()" hide-gt-sm aria-label="Menu" class="md-icon-button material-icons">
+    <md-button ng-hide="excluir" ng-click="toggleLeft()" hide-gt-sm aria-label="Menu" class="md-icon-button material-icons">
       menu
     </md-button>
-    <h3>
-      Lista de contratos
-    </h3>
+    <h1 ng-hide="excluir">Lista de contratos</h1>
+    <md-button ng-show="excluir" ng-click="excluir = false" aria-label="Voltar" class="md-icon-button material-icons back-top">
+      arrow_back
+    </md-button>
+    <h2 ng-show="excluir">Excluir contratos</h2>
     <span flex></span>
 
     <md-button hide show-gt-sm aria-label="Pesquisar" ng-click="showSearch = !showSearch" class="md-icon-button material-icons">
@@ -33,8 +35,7 @@
       delete
       <md-tooltip> Excluir </md-tooltip>
     </md-button>
-    <md-button hide show-gt-sm aria-label="Excluir contrato" ng-click="excluir = false; excluirContratosSelecionados();" ng-show="excluir"
-      class="md-icon-button material-icons">
+    <md-button hide show-gt-sm aria-label="Excluir contrato" ng-click="confirmaExclusao($event)" ng-show="excluir" class="md-icon-button material-icons">
       delete_forever
       <md-tooltip> Deletar </md-tooltip>
     </md-button>
@@ -73,12 +74,15 @@
 </md-sidenav>
 
 <md-list flex class="no-padding">
+  <md-subheader ng-if="lista.length == 0">
+    Não existem contratos cadastrados!
+  </md-subheader>
   <md-subheader layout-fill ng-click="selecionaTodos();" class="no-outline pointer" ng-show="excluir">
     <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong> {{todosSelecionados}}
   </md-subheader>
   <md-divider></md-divider>
   <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event)" ng-hide="excluir">
-    <div class="md-list-item-text no-outline" layout="row" >
+    <div class="md-list-item-text no-outline" layout="row">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
       <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date"></span></h4>
       <p>Status da aprovação: <span ng-bind="ct.status"></span></p>

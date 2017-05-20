@@ -1,4 +1,4 @@
-app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDialog) {
+app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDialog, $mdToast) {
   var vm = $scope;
 
   vm.lista = {};
@@ -26,6 +26,7 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
         }
       }
     }
+    vm.excluir = false;
   };
 
   vm.ordenarListaPor = function (campo) {
@@ -39,7 +40,7 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: false,
-      fullscreen: true//vm.customFullscreen // Only for -xs, -sm breakpoints.
+      fullscreen: true
     })
       .then(function (answer) {
         vm.status = 'You said the information was "' + answer + '".';
@@ -61,6 +62,43 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
       $mdDialog.hide(answer);
     };
   }
+
+  vm.confirmaExclusao = function (ev) {
+    var totalSelecionado = 0;
+    vm.lista.forEach(function (item) {
+      if (item.selecionado) {
+        totalSelecionado++;
+      }
+    });
+
+    if (totalSelecionado > 0) {
+      var confirm = $mdDialog.confirm()
+        .title('Tem certeza que deseja excluir os contatos selecionados?')
+        .textContent('Esta ação não poderá ser desfeita.')
+        .ariaLabel('Confirmação de exclusão')
+        .targetEvent(ev)
+        .ok('Sim!')
+        .cancel('Cancelar');
+
+      $mdDialog.show(confirm).then(function () {
+        vm.excluirContratosSelecionados();
+      }, function () {
+        console.info = 'Cancelamento de exclusão';
+      });
+    } else {
+      notification('Selecione algum contrato para excluir');
+    }
+
+  };
+
+  function notification(text) {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent(text)
+        .position("top right")
+        .hideDelay(3000)
+    );
+  };
 
   function activate() {
     vm.getListaContratos();
