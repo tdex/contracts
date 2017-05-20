@@ -78,13 +78,13 @@
     Não existem contratos cadastrados!
   </md-subheader>
   <md-subheader layout-fill ng-click="selecionaTodos();" class="no-outline pointer" ng-show="excluir">
-    <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong> {{todosSelecionados}}
+    <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong>
   </md-subheader>
   <md-divider></md-divider>
   <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event)" ng-hide="excluir">
     <div class="md-list-item-text no-outline" layout="row">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
-      <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date"></span></h4>
+      <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date: 'dd/MM/yyyy'"></span></h4>
       <p>Status da aprovação: <span ng-bind="ct.status"></span></p>
     </div>
     <md-divider></md-divider>
@@ -94,7 +94,7 @@
     <md-checkbox ng-model="ct.selecionado"></md-checkbox>
     <div class="md-list-item-text no-outline" layout="row" ng-click="ct.selecionado = !ct.selecionado">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
-      <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date"></span></h4>
+      <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date: 'dd/MM/yyyy'"></span></h4>
       <p>Status da aprovação: <span ng-bind="ct.status"></span></p>
     </div>
     <md-divider></md-divider>
