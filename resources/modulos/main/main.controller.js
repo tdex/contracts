@@ -3,6 +3,7 @@ app.controller('MainController', function ($scope, $mdSidenav, $mdDialog) {
   var originatorEv;
   vm.title = 'Contratos';
 
+  // abre e fecha menu
   vm.toggleLeft = buildToggler('left');
   vm.toggleRight = buildToggler('right');
 

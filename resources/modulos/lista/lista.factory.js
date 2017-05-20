@@ -4,7 +4,9 @@ app.factory('ListaFactory', function () {
     var retorno = [];
     if (lista) {
       lista.contracts.forEach(function (item) {
-        retorno.push(new ItemLista(item));
+        var ct = new ItemLista(item);
+        ct.id = retorno.length;
+        retorno.push(ct);
       });
       return retorno;
     }
