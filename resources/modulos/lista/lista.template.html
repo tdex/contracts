@@ -80,7 +80,7 @@
     <md-checkbox hide ng-model="todosSelecionados" aria-label="Selecionar todos contratos"></md-checkbox> <strong>Selecionar todos</strong>
   </md-subheader>
   <md-divider></md-divider>
-  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event, ct)"
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa | orderBy: ordemLista" ng-click="selecionaContrato($event, ct)"
     ng-hide="excluir">
     <div class="md-list-item-text no-outline" layout="column">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
@@ -90,7 +90,7 @@
     <md-divider></md-divider>
   </md-list-item>
 
-  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-show="excluir" ng-click="null" class="no-outline pointer">
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa | orderBy: ordemLista" ng-show="excluir" ng-click="null" class="no-outline pointer">
     <md-checkbox ng-model="ct.selecionado"></md-checkbox>
     <div class="md-list-item-text no-outline" layout="column" ng-click="ct.selecionado = !ct.selecionado">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>

@@ -30,7 +30,8 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
   };
 
   vm.ordenarListaPor = function (campo) {
-    console.log(campo);
+    console.info('Lista ordenada por: ' + campo);
+    vm.ordemLista = campo;
   };
 
   vm.selecionaContrato = function (ev, contrato) {
