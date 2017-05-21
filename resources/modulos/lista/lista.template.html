@@ -14,7 +14,7 @@
       search
       <md-tooltip> Pesquisar </md-tooltip>
     </md-button>
-    <md-button hide show-gt-xs aria-label="Adicionar contrato" ng-hide="excluir" ng-click="addContrato($event)" class="md-icon-button material-icons">
+    <md-button hide show-gt-xs aria-label="Adicionar contrato" ng-hide="excluir" ng-click="addContrato($event); filtroPesquisa = ''" class="md-icon-button material-icons">
       add
       <md-tooltip> Adicionar </md-tooltip>
     </md-button>
@@ -55,7 +55,7 @@
           <span> Pesquisar </span>
         </div>
       </md-list-item>
-      <md-list-item ng-click="toggleLeft(); addContrato($event)">
+      <md-list-item ng-click="toggleLeft(); addContrato($event); filtroPesquisa = ''">
         <div class="md-list-item-text" layout="row" layout-align="space-around center">
           <i class="material-icons">add </i>
           <span> Adicionar </span>
@@ -90,7 +90,8 @@
     <md-divider></md-divider>
   </md-list-item>
 
-  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa | orderBy: ordemLista" ng-show="excluir" ng-click="null" class="no-outline pointer">
+  <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa | orderBy: ordemLista" ng-show="excluir"
+    ng-click="null" class="no-outline pointer">
     <md-checkbox ng-model="ct.selecionado"></md-checkbox>
     <div class="md-list-item-text no-outline" layout="column" ng-click="ct.selecionado = !ct.selecionado">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>

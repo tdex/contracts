@@ -1,5 +1,5 @@
 <md-dialog aria-label="Dados do contrato">
-  <form ng-cloak>
+  <form ng-cloak name="edicaoForm" novalidate>
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>Contrato: <span ng-bind="ct.codigo"></span></h2>
@@ -12,92 +12,131 @@
 
     <md-dialog-content>
       <div class="md-dialog-content">
-        <form name="edicaoForm">
+        <div layout="column">
+          <md-input-container>
+            <label>Código</label>
+            <input name="codigo" ng-model="ct.codigo" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.codigo.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-          <div layout="column">
-            <md-input-container>
-              <label>Código</label>
-              <input ng-model="ct.codigo" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Data Acordo comercial</label>
+            <md-datepicker ng-model="ct.dataAcordo" name="dataAcordo" md-max-date="dataAtual" md-placeholder="DD/MM/AAAA" data-ng-disabled="!edicao"
+              ng-required="true" format="dd/MM/yyyy"></md-datepicker>
+            <div ng-messages="edicaoForm.dataAcordo.$error">
+              <div ng-message="valid">Insira uma data valida!</div>
+              <div ng-message="required">campo obrigatório!</div>
+              <div ng-message="maxdate">A data não pode ser superior a data atual</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Data Acordo comercial</label>
-              <md-datepicker ng-model="ct.dataAcordo" name="dataAcordo" md-max-date="dataAtual" md-placeholder="DD/MM/AAAA" data-ng-disabled="!edicao"
-                ng-required></md-datepicker>
-              <div ng-messages="edicaoForm.dataAcordo.$error">
-                <div ng-message="valid">Insira uma data valida!</div>
-                <div ng-message="required">Este campo é obrigatório!</div>
-                <div ng-message="maxdate">A data não pode ser superior a data atual</div>
-              </div>
-            </md-input-container>
+          <md-input-container>
+            <label>Natureza</label>
+            <input name="natureza" ng-model="ct.natureza" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.natureza.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Natureza</label>
-              <input ng-model="ct.natureza" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Comprador</label>
+            <input name="comprador" ng-model="ct.comprador" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.comprador.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Comprador</label>
-              <input ng-model="ct.comprador" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Vendedor</label>
+            <input name="vendedor" ng-model="ct.vendedor" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.vendedor.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Vendedor</label>
-              <input ng-model="ct.vendedor" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Energia referência</label>
+            <input name="energiaReferencia" ng-model="ct.energiaReferencia" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.energiaReferencia.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Energia referência</label>
-              <input ng-model="ct.energiaReferencia" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Energia entregue</label>
+            <input name="energiaEntregue" ng-model="ct.energiaEntregue" data-ng-disabled="!edicao" ng-required="false">
+          </md-input-container>
 
-            <md-input-container>
-              <label>Energia entregue</label>
-              <input ng-model="ct.energiaEntregue" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Status aprovação</label>
+            <md-select name="status" ng-model="ct.status" data-ng-disabled="!edicao" ng-required="true">
+              <md-option value="Aprovado">Aprovado</md-option>
+              <md-option value="Pendente">Pendente</md-option>
+            </md-select>
+            <div ng-messages="edicaoForm.status.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Status aprovação</label>
-              <input ng-model="ct.status" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Modelo</label>
+            <input name="modelo" ng-model="ct.modelo" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.modelo.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Modelo</label>
-              <input ng-model="ct.modelo" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Preço base contratado</label>
+            <input name="preco" ng-model="ct.preco" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.preco.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Preço base contratado</label>
-              <input ng-model="ct.preco" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Submercado</label>
+            <input name="submercado" ng-model="ct.submercado" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.submercado.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Submercado</label>
-              <input ng-model="ct.submercado" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Início fornecimento</label>
+            <input name="inicioFornecimento" ng-model="ct.inicioFornecimento" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.inicioFornecimento.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Início fornecimento</label>
-              <input ng-model="ct.inicioFornecimento" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Fim fornecimento</label>
+            <input name="fimFornecimento" ng-model="ct.fimFornecimento" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.fimFornecimento.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Fim fornecimento</label>
-              <input ng-model="ct.fimFornecimento" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Início vigência</label>
+            <input name="inicioVigencia" ng-model="ct.inicioVigencia" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.inicioVigencia.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
 
-            <md-input-container>
-              <label>Início vigência</label>
-              <input ng-model="ct.inicioVigencia" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
+          <md-input-container>
+            <label>Fim vigência</label>
+            <input name="fimVigencia" ng-model="ct.fimVigencia" data-ng-disabled="!edicao" ng-required="true">
+            <div ng-messages="edicaoForm.fimVigencia.$error">
+              <div ng-message="required">campo obrigatório!</div>
+            </div>
+          </md-input-container>
+        </div>
 
-            <md-input-container>
-              <label>Fim vigência</label>
-              <input ng-model="ct.fimVigencia" data-ng-disabled="!edicao" ng-required>
-            </md-input-container>
-          </div>
-
-        </form>
       </div>
     </md-dialog-content>
 
@@ -105,15 +144,11 @@
       <md-button md-autofocus ng-click="edicao = true" ng-hide="edicao">
         Editar
       </md-button>
-      <span flex ng-hide="edicao"></span>
-      <md-button ng-click="answer('not useful')" ng-show="edicao && !novoct" class="md-warn">
-        Excluir
-      </md-button>
-      <span flex ng-show="edicao"></span>
-      <md-button type="submit" data-ng-form="edicaoForm" ng-click="salvar(ct)" ng-show="edicao && novoct" class="md-raised md-primary" data-ng-disabled="edicaoForm.$invalid">
+      <span flex></span>
+      <md-button type="submit" ng-click="salvar(ct)" ng-show="edicao && novoct" class="md-raised md-primary" ng-disabled="edicaoForm.$invalid">
         Salvar
       </md-button>
-      <md-button type="submit" data-ng-form="edicaoForm" ng-click="hide()" ng-show="edicao && !novoct" class="md-raised md-primary" data-ng-disabled="edicaoForm.$invalid">
+      <md-button type="submit" ng-click="hide()" ng-show="edicao && !novoct" class="md-raised md-primary" ng-disabled="edicaoForm.$invalid">
         Salvar
       </md-button>
     </md-dialog-actions>

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url('https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css');
 
 #corpo-page {
   height: 100vh;
