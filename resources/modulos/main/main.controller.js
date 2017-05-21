@@ -13,9 +13,9 @@ app.controller('MainController', function ($scope, $mdSidenav, $mdDialog) {
     };
   }
 
-  vm.openMenuReordenacao = function ($mdOpenMenu, ev) {
+  vm.openMenuReordenacao = function ($mdMenu, ev) {
     originatorEv = ev;
-    $mdOpenMenu(ev);
+    $mdMenu.open(ev);
   };
 
   vm.opcoesMenu = [
