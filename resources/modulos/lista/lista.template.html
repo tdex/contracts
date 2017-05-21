@@ -32,7 +32,7 @@
     </md-button>
     <md-input-container flex class="navbar-search">
       <label>&nbsp;</label>
-      <input ng-model="filtroPesquisa" placeholder="Pesquisar" autofocus autocomplete="false">
+      <input ng-model="filtroPesquisa" placeholder="Pesquisar" autofocus autocomplete="false" type="search">
     </md-input-container>
   </div>
 </md-toolbar>
@@ -82,7 +82,7 @@
   <md-divider></md-divider>
   <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-click="selecionaContrato($event, ct)"
     ng-hide="excluir">
-    <div class="md-list-item-text no-outline" layout="row">
+    <div class="md-list-item-text no-outline" layout="column">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
       <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date: 'dd/MM/yyyy'"></span></h4>
       <p>Status da aprovação: <span ng-bind="ct.status"></span></p>
@@ -92,7 +92,7 @@
 
   <md-list-item class="md-2-line" ng-repeat="ct in lista | filter: filtroPesquisa" ng-show="excluir" ng-click="null" class="no-outline pointer">
     <md-checkbox ng-model="ct.selecionado"></md-checkbox>
-    <div class="md-list-item-text no-outline" layout="row" ng-click="ct.selecionado = !ct.selecionado">
+    <div class="md-list-item-text no-outline" layout="column" ng-click="ct.selecionado = !ct.selecionado">
       <h3>Código: <span ng-bind="ct.codigo"></span></h3>
       <h4>Data do acordo: <span ng-bind="ct.dataAcordo | date: 'dd/MM/yyyy'"></span></h4>
       <p>Status da aprovação: <span ng-bind="ct.status"></span></p>

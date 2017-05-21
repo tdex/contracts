@@ -54,6 +54,7 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
 
   function contratoModalController($scope, $mdDialog, contrato) {
     $scope.edicao = false;
+    $scope.dataAtual = new Date();
     $scope.ct = contrato;
 
     console.log($scope.ct);
