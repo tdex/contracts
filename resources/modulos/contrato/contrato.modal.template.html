@@ -17,12 +17,13 @@
           <div layout="column">
             <md-input-container>
               <label>Código</label>
-              <input ng-model="ct.codigo" data-ng-disabled="!edicao">
+              <input ng-model="ct.codigo" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Data Acordo comercial</label>
-              <md-datepicker ng-model="ct.dataAcordo" name="dataAcordo" md-max-date="dataAtual" placeholder="Data Acordo comercial" data-ng-disabled="!edicao"></md-datepicker>
+              <md-datepicker ng-model="ct.dataAcordo" name="dataAcordo" md-max-date="dataAtual" md-placeholder="DD/MM/AAAA" data-ng-disabled="!edicao"
+                ng-required></md-datepicker>
               <div ng-messages="edicaoForm.dataAcordo.$error">
                 <div ng-message="valid">Insira uma data valida!</div>
                 <div ng-message="required">Este campo é obrigatório!</div>
@@ -32,67 +33,67 @@
 
             <md-input-container>
               <label>Natureza</label>
-              <input ng-model="ct.natureza" data-ng-disabled="!edicao">
+              <input ng-model="ct.natureza" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Comprador</label>
-              <input ng-model="ct.comprador" data-ng-disabled="!edicao">
+              <input ng-model="ct.comprador" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Vendedor</label>
-              <input ng-model="ct.vendedor" data-ng-disabled="!edicao">
+              <input ng-model="ct.vendedor" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Energia referência</label>
-              <input ng-model="ct.energiaReferencia" data-ng-disabled="!edicao">
+              <input ng-model="ct.energiaReferencia" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Energia entregue</label>
-              <input ng-model="ct.energiaEntregue" data-ng-disabled="!edicao">
+              <input ng-model="ct.energiaEntregue" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Status aprovação</label>
-              <input ng-model="ct.status" data-ng-disabled="!edicao">
+              <input ng-model="ct.status" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Modelo</label>
-              <input ng-model="ct.modelo" data-ng-disabled="!edicao">
+              <input ng-model="ct.modelo" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Preço base contratado</label>
-              <input ng-model="ct.preco" data-ng-disabled="!edicao">
+              <input ng-model="ct.preco" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Submercado</label>
-              <input ng-model="ct.submercado" data-ng-disabled="!edicao">
+              <input ng-model="ct.submercado" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Início fornecimento</label>
-              <input ng-model="ct.inicioFornecimento" data-ng-disabled="!edicao">
+              <input ng-model="ct.inicioFornecimento" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Fim fornecimento</label>
-              <input ng-model="ct.fimFornecimento" data-ng-disabled="!edicao">
+              <input ng-model="ct.fimFornecimento" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Início vigência</label>
-              <input ng-model="ct.inicioVigencia" data-ng-disabled="!edicao">
+              <input ng-model="ct.inicioVigencia" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
 
             <md-input-container>
               <label>Fim vigência</label>
-              <input ng-model="ct.fimVigencia" data-ng-disabled="!edicao">
+              <input ng-model="ct.fimVigencia" data-ng-disabled="!edicao" ng-required>
             </md-input-container>
           </div>
 
@@ -105,11 +106,14 @@
         Editar
       </md-button>
       <span flex ng-hide="edicao"></span>
-      <md-button ng-click="answer('not useful')" ng-show="edicao" class="md-warn">
+      <md-button ng-click="answer('not useful')" ng-show="edicao && !novoct" class="md-warn">
         Excluir
       </md-button>
       <span flex ng-show="edicao"></span>
-      <md-button ng-click="answer('useful')" ng-show="edicao" class="md-raised md-primary">
+      <md-button type="submit" data-ng-form="edicaoForm" ng-click="salvar(ct)" ng-show="edicao && novoct" class="md-raised md-primary" data-ng-disabled="edicaoForm.$invalid">
+        Salvar
+      </md-button>
+      <md-button type="submit" data-ng-form="edicaoForm" ng-click="hide()" ng-show="edicao && !novoct" class="md-raised md-primary" data-ng-disabled="edicaoForm.$invalid">
         Salvar
       </md-button>
     </md-dialog-actions>

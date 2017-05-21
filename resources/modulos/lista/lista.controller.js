@@ -45,19 +45,49 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
         contrato: contrato
       }
     })
-      .then(function (answer) {
-        vm.status = 'You said the information was "' + answer + '".';
+      .then(function (novoCtResponse) {
+        console.log(novoCtResponse); // chamar push na lista
       }, function () {
-        vm.status = 'You cancelled the dialog.';
+        console.info('Você cancelou a edição do contrato.');
+      });
+  };
+
+  vm.addContrato = function (ev) {
+    $mdDialog.show({
+      controller: contratoModalController,
+      templateUrl: 'resources/modulos/contrato/contrato.modal.template.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: false,
+      fullscreen: true,
+      locals: {
+        contrato: undefined
+      }
+    })
+      .then(function (novoCtResponse) {
+        console.log(novoCtResponse); // chamar push na lista
+        if (novoCtResponse) vm.lista.push(novoCtResponse);
+      }, function () {
+        console.info('Você cancelou a edição do contrato.');
       });
   };
 
   function contratoModalController($scope, $mdDialog, contrato) {
     $scope.edicao = false;
     $scope.dataAtual = new Date();
-    $scope.ct = contrato;
+    $scope.novoct = false;
 
-    console.log($scope.ct);
+    (function init() {
+      if (contrato) {
+        $scope.ct = contrato;
+      } else {
+        $scope.ct = {};
+        $scope.edicao = true;
+        $scope.novoct = true;
+      }
+    })();
+
+    // console.log($scope.ct);
     $scope.hide = function () {
       $mdDialog.hide();
     };
@@ -66,8 +96,8 @@ app.controller('ListaController', function ($scope, $http, ListaFactory, $mdDial
       $mdDialog.cancel();
     };
 
-    $scope.answer = function (answer) {
-      $mdDialog.hide(answer);
+    $scope.salvar = function (novoCt) {
+      $mdDialog.hide(novoCt);
     };
   }
 

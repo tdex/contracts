@@ -1,6 +1,6 @@
 <md-toolbar ng-show="!showSearch" class="menu">
   <div class="md-toolbar-tools">
-    <md-button ng-hide="excluir" ng-click="toggleLeft()" hide-gt-sm aria-label="Menu" class="md-icon-button material-icons">
+    <md-button ng-hide="excluir" ng-click="toggleLeft()" hide-gt-xs aria-label="Menu" class="md-icon-button material-icons">
       menu
     </md-button>
     <h1 ng-hide="excluir">Lista de contratos</h1>
@@ -10,15 +10,15 @@
     <h2 ng-show="excluir">Excluir contratos</h2>
     <span flex></span>
 
-    <md-button hide show-gt-sm aria-label="Pesquisar" ng-click="showSearch = !showSearch" class="md-icon-button material-icons">
+    <md-button hide show-gt-xs aria-label="Pesquisar" ng-click="showSearch = !showSearch" class="md-icon-button material-icons">
       search
       <md-tooltip> Pesquisar </md-tooltip>
     </md-button>
-    <md-button hide show-gt-sm aria-label="Adicionar contrato" ng-hide="excluir" ng-click="showListBottomSheet($event)" class="md-icon-button material-icons">
+    <md-button hide show-gt-xs aria-label="Adicionar contrato" ng-hide="excluir" ng-click="addContrato($event)" class="md-icon-button material-icons">
       add
       <md-tooltip> Adicionar </md-tooltip>
     </md-button>
-    <md-button hide show-gt-sm aria-label="Excluir contrato" ng-click="excluir = true" ng-hide="excluir" class="md-icon-button material-icons">
+    <md-button hide show-gt-xs aria-label="Excluir contrato" ng-click="excluir = true" ng-hide="excluir" class="md-icon-button material-icons">
       delete
       <md-tooltip> Excluir </md-tooltip>
     </md-button>
@@ -37,7 +37,7 @@
   </div>
 </md-toolbar>
 
-<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4">
   <md-toolbar class="md-theme-indigo">
     <h1 class="md-toolbar-tools">
       <md-button ng-click="toggleLeft()" aria-label="Back" class="md-icon-button material-icons">
@@ -55,7 +55,7 @@
           <span> Pesquisar </span>
         </div>
       </md-list-item>
-      <md-list-item ng-click="toggleLeft();">
+      <md-list-item ng-click="toggleLeft(); addContrato($event)">
         <div class="md-list-item-text" layout="row" layout-align="space-around center">
           <i class="material-icons">add </i>
           <span> Adicionar </span>
